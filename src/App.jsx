@@ -1,33 +1,34 @@
-import './App.css'
-import Login from '../components/Login'
-import UserState from '../context/user/UserState'
-import Navbar from '../components/Navbar'
-import {Route, Routes, useNavigate } from 'react-router-dom';
-import Signup from '../components/Signup';
-import { useEffect } from 'react';
+// App.js
 
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from '../components/Login';
+import Signup from '../components/Signup';
+import AdminDashboard from '../components/AdminDashboard';
+import UserDashboard from '../components/UserDashboard';
+import ProtectedRoute from '../components/ProtectedRoute';
+import Navbar from '../components/Navbar'; // Ensure Navbar is imported
 
 function App() {
-
-  const navi = useNavigate();
-  const temp = () =>{
-    navi('/login');
-  }
-  useEffect(temp, []);
-  
   return (
     <>
-      
-      <UserState>
-          <Navbar />
-
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-      </UserState>
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route element={<ProtectedRoute role="admin" />}>
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        </Route>
+        <Route element={<ProtectedRoute role="customer" />}>
+          <Route path="/customer-dashboard" element={<UserDashboard />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
+
+

@@ -9,37 +9,36 @@ function Signup() {
     email: "",
     password: "",
     name: "",
+    role: "customer", // Default role
   });
+
   const changeHandler = (e) => {
     setTempCred({ ...tempCred, [e.target.name]: e.target.value });
   };
+
   const clickHandler = (e) => {
     e.preventDefault();
     if (confirmPass !== tempCred.password) {
-      console.log("passwords does not match");
+      console.log("Passwords do not match");
     } else {
-      signUpUser(tempCred);
+      signUpUser(tempCred); // Send the role along with other credentials
     }
   };
+
   return (
     <div>
       <div className="container my-5">
         <form>
           <div className="mb-3">
-            <h2 htmlFor="exampleInputEmail1" className="form-label my-3">
-              Name
-            </h2>
+            <h2 className="form-label my-3">Name</h2>
             <input
-              type="email"
+              type="text" // Corrected type to text
               className="form-control"
               id="name"
               name="name"
-              aria-describedby="emailHelp"
               onChange={changeHandler}
             />
-            <h2 htmlFor="exampleInputEmail1" className="form-label my-3">
-              Email address
-            </h2>
+            <h2 className="form-label my-3">Email address</h2>
             <input
               type="email"
               className="form-control"
@@ -53,9 +52,7 @@ function Signup() {
             </div>
           </div>
           <div className="mb-3">
-            <h2 htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </h2>
+            <h2 className="form-label">Password</h2>
             <input
               type="password"
               className="form-control"
@@ -63,9 +60,7 @@ function Signup() {
               name="password"
               onChange={changeHandler}
             />
-            <h2 htmlFor="exampleInputPassword1" className="form-label my-3">
-              Confirm Password
-            </h2>
+            <h2 className="form-label my-3">Confirm Password</h2>
             <input
               type="password"
               className="form-control"
@@ -75,6 +70,17 @@ function Signup() {
                 setConfirmPass(e.target.value);
               }}
             />
+            <h2 className="form-label my-3">Role</h2>
+            <select
+              className="form-control"
+              id="role"
+              name="role"
+              onChange={changeHandler}
+              value={tempCred.role}
+            >
+              <option value="customer">Customer</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
 
           <button

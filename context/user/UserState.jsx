@@ -1,69 +1,85 @@
-import { useNavigate } from "react-router-dom";
-import UserContext from "./CreateContext";
-
-
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserContext from './CreateContext';
 
 const UserState = (props) => {
+  const navigate = useNavigate(); // Use useNavigate for navigation
 
-    const navi = useNavigate();
-
-//login User and get auth token
+  // Function to handle user login
   const loginUser = async (credentials) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: myHeaders,
-      body:JSON.stringify(credentials)
-    });
-    const res = await response.json();
-    if(res.success){
-      
-      localStorage.setItem('auth-token', res.token);
-      localStorage.setItem('logged', "true");
-      //alert('logged in succesfully');
-      navi('/login');
-      return true;
-    }else{
-      alert('incorrect credentials');
+    try {
+      const response = await fetch('http://localhost:5000/api/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      const res = await response.json();
+
+      if (res.success) {
+        localStorage.setItem('auth-token', res.token);
+        localStorage.setItem('role', res.role); // Store user role
+
+        // Redirect based on role
+        if (res.role === 'admin') {
+          navigate('/admin-dashboard');
+        } else {
+          navigate('/user-dashboard');
+        }
+        return true;
+      } else {
+        alert('Incorrect credentials');
+        return false;
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login');
       return false;
     }
-  }
+  };
 
-//Create User
+  // Function to handle user signup
+  // UserState.jsx
+
 const signUpUser = async (credentials) => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
-      method: "POST",
-      headers: myHeaders,
-      body:JSON.stringify(credentials)
+  try {
+    const response = await fetch('http://localhost:5000/api/user/createuser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
     });
 
-    const authToken = await response.json();
-    if(authToken.success){
-
-      localStorage.setItem('auth-token', authToken.token);
-      navi('/login');
-    }else{
-      alert('incorrect credentials');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
-    
+
+    const authToken = await response.json();
+
+    if (authToken.success) {
+      localStorage.setItem('auth-token', authToken.token);
+      navigate('/login');
+    } else {
+      alert('Sign up unsuccessful');
+    }
+  } catch (error) {
+    console.error('Error during sign up:', error);
+    alert('An error occurred during sign up');
   }
+};
 
-  //signOut 
-
-  const signOut = ()=>{
-    localStorage.setItem('auth-token', null);
-    localStorage.setItem('logged', 'false');
-
-  }
-
+  // Function to handle user logout
+  const signOut = () => {
+    localStorage.removeItem('auth-token');
+    localStorage.removeItem('role');
+    navigate('/login'); // Redirect to login page after logout
+  };
 
   return (
-    <UserContext.Provider value={{ loginUser, signUpUser, signOut}}>
+    <UserContext.Provider value={{ loginUser, signUpUser, signOut }}>
       {props.children}
     </UserContext.Provider>
   );
