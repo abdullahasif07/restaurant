@@ -17,6 +17,7 @@ const UserState = (props) => {
       });
 
       const res = await response.json();
+      console.log(res)
 
       if (res.success) {
         localStorage.setItem('auth-token', res.token);
@@ -44,7 +45,11 @@ const UserState = (props) => {
   // UserState.jsx
 
 const signUpUser = async (credentials) => {
+
+  console.log("Payload sent:", JSON.stringify(credentials));
+
   try {
+    
     const response = await fetch('http://localhost:5000/api/user/createuser', {
       method: 'POST',
       headers: {

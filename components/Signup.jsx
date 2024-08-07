@@ -6,10 +6,11 @@ function Signup() {
   const { signUpUser } = userHandler;
   const [confirmPass, setConfirmPass] = useState("");
   const [tempCred, setTempCred] = useState({
+    username: "",
+    name: "",
     email: "",
     password: "",
-    name: "",
-    role: "customer", // Default role
+    role: "customer",
   });
 
   const changeHandler = (e) => {
@@ -21,7 +22,7 @@ function Signup() {
     if (confirmPass !== tempCred.password) {
       console.log("Passwords do not match");
     } else {
-      signUpUser(tempCred); // Send the role along with other credentials
+      signUpUser(tempCred);
     }
   };
 
@@ -30,9 +31,17 @@ function Signup() {
       <div className="container my-5">
         <form>
           <div className="mb-3">
+            <h2 className="form-label my-3">Username</h2>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              name="username" // Ensure this matches your backend expectation
+              onChange={changeHandler}
+            />
             <h2 className="form-label my-3">Name</h2>
             <input
-              type="text" // Corrected type to text
+              type="text"
               className="form-control"
               id="name"
               name="name"

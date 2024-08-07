@@ -3,6 +3,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../context/user/CreateContext";
+import '../styles/css/login.css'; // Import the CSS file
 
 function Login() {
   const { loginUser } = useContext(UserContext);
@@ -22,6 +23,7 @@ function Login() {
       if (role === 'admin') {
         navigate('/admin-dashboard'); // Use navigate for routing
       } else {
+        console.log("role found success")
         navigate('/user-dashboard');
       }
     }
@@ -29,8 +31,20 @@ function Login() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="email" name="email" onChange={handleChange} required />
-      <input type="password" name="password" onChange={handleChange} required />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={handleChange}
+        required
+      />
       <button type="submit">Login</button>
     </form>
   );

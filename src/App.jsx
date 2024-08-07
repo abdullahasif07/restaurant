@@ -20,7 +20,7 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>
         <Route element={<ProtectedRoute role="customer" />}>
-          <Route path="/customer-dashboard" element={<UserDashboard />} />
+          <Route path="/user-dashboard" element={<UserDashboard />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
