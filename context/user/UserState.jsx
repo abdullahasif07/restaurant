@@ -17,10 +17,11 @@ const UserState = (props) => {
       });
 
       const res = await response.json();
-      console.log(res)
+      //console.log(res)
 
       if (res.success) {
         localStorage.setItem('auth-token', res.token);
+        localStorage.setItem('logged', 'true');
         localStorage.setItem('role', res.role); // Store user role
 
         // Redirect based on role
@@ -35,7 +36,7 @@ const UserState = (props) => {
         return false;
       }
     } catch (error) {
-      console.error('Error during login:', error);
+      //console.error('Error during login:', error);
       alert('An error occurred during login');
       return false;
     }
@@ -46,7 +47,7 @@ const UserState = (props) => {
 
 const signUpUser = async (credentials) => {
 
-  console.log("Payload sent:", JSON.stringify(credentials));
+  //console.log("Payload sent:", JSON.stringify(credentials));
 
   try {
     
@@ -59,7 +60,7 @@ const signUpUser = async (credentials) => {
     });
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw await response.json();
     }
 
     const authToken = await response.json();
@@ -71,8 +72,8 @@ const signUpUser = async (credentials) => {
       alert('Sign up unsuccessful');
     }
   } catch (error) {
-    console.error('Error during sign up:', error);
-    alert('An error occurred during sign up');
+    //console.error('Error during sign up:', error);
+    alert(error.error);
   }
 };
 
@@ -80,6 +81,8 @@ const signUpUser = async (credentials) => {
   const signOut = () => {
     localStorage.removeItem('auth-token');
     localStorage.removeItem('role');
+    localStorage.setItem('logged', 'false');
+
     navigate('/login'); // Redirect to login page after logout
   };
 

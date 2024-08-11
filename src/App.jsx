@@ -8,6 +8,7 @@ import AdminDashboard from '../components/AdminDashboard';
 import UserDashboard from '../components/UserDashboard';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Navbar from '../components/Navbar'; // Ensure Navbar is imported
+import MenuForm from '../components/MenuForm';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/menuform" element={<MenuForm />} />
         <Route element={<ProtectedRoute role="admin" />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Route>

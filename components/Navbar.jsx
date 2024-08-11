@@ -14,6 +14,8 @@ function Navbar() {
     signOut();
     alert('logged out Successfully');
   }
+
+  const dashboardType = '/' + localStorage.getItem('role');
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div >
@@ -29,18 +31,18 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {/* <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {<li className="nav-item">
-                 <Link className={`nav-link ${location.pathname === '/' ? "active" : ""}`} aria-current="page" to="/">
+          {localStorage.getItem('role') && <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className={`nav-link`} aria-current="page" to={dashboardType}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname === '/about' ? "active" : ""}`} to="/about">
-                About
+              <Link className={`nav-link`} to={dashboardType}>
+                Menu
               </Link>
             </li>
-          </ul>} */}
+          </ul>}
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className={`btn btn-primary mx-2 ${logged?'d-none':''}`} to="/login">
