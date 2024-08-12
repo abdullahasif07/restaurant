@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react";
 import MenuContext from "../context/menu/CreateContext";
+import { useNavigate } from "react-router-dom";
 
 const MenuForm = () => {
-  const { addItem } = useContext(MenuContext);
-  const [menuData, setMenuData] = useState({
+  const { addItem, updateItem } = useContext(MenuContext);
+  const navi = useNavigate();
+  const checkUpdateOrAdd = JSON.parse(localStorage.getItem('tempItem'));
+
+  const [menuData, setMenuData] = useState(checkUpdateOrAdd?checkUpdateOrAdd:{
     name: "",
     ingredients: "",
     rating: 0,
@@ -12,6 +16,8 @@ const MenuForm = () => {
     image: "",
     category: "appetizer",
   });
+
+  
 
   const changeHandler = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,8 +29,14 @@ const MenuForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(menuData);
-    addItem(menuData);
+    console.log(menuData)
+    
+    
+    !checkUpdateOrAdd?addItem(menuData):updateItem(menuData, checkUpdateOrAdd._id);
+
+    navi('/admin-dashboard');
+    localStorage.removeItem('tempItem');
+    
   };
 
   return (
