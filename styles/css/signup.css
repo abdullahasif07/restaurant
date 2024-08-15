@@ -1,0 +1,83 @@
+/* Ensure the form is fully visible and centered */
+.signup-container {
+    background-color: #f8d7da; /* Light reddish background color */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1; /* Ensure form is on top of other elements */
+  }
+  
+  .signup-container .container {
+    background-color: #ffffff; /* White background for the form */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+    width: 100%;
+    max-width: 450px; /* Adjusted to make it slightly wider */
+    z-index: 2; /* Ensure form stays on top */
+  }
+  
+  .signup-container .form-label {
+    color: #b22222; /* Dark red color for labels */
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .signup-container .form-control {
+    border: 2px solid #b22222; /* Slightly thicker border */
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  
+  .signup-container select.form-control {
+    color: #b22222; /* Dark red text for dropdown */
+  }
+  
+  .signup-container .btn-primary {
+    background-color: #b22222; /* Dark red background for the button */
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    color: #ffffff; /* White text for the button */
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make the button take full width */
+    margin-top: 20px;
+  }
+  
+  .signup-container .btn-primary:hover {
+    background-color: #800000; /* Darker red on hover */
+  }
+  
+  .signup-container .form-text {
+    color: #555555;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  
+  .signup-container h2 {
+    font-size: 22px; /* Slightly larger font size for better readability */
+    margin-bottom: 15px;
+    color: #333333;
+  }
+  
+  /* Additional styling to ensure form is visible */
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  nav {
+    position: relative;
+    z-index: 3; /* Ensure navbar is above the form's container */
+  }
+  

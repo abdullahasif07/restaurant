@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react";
 import UserContext from "../context/user/CreateContext";
+// import '../styles/css/signup.css'; // Import the CSS file
+
+
 
 function Signup() {
   const userHandler = useContext(UserContext);
@@ -27,7 +30,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className="signup-container"> {/* Unique class for scoping */}
       <div className="container my-5">
         <form>
           <div className="mb-3">
@@ -36,7 +39,7 @@ function Signup() {
               type="text"
               className="form-control"
               id="username"
-              name="username" // Ensure this matches your backend expectation
+              name="username"
               onChange={changeHandler}
             />
             <h2 className="form-label my-3">Name</h2>
