@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/css/Customer.css'; // Import the CSS file
 
 function UserDashboard() {
   const navigate = useNavigate();
@@ -17,15 +18,15 @@ function UserDashboard() {
   };
 
   return (
-    <div className="user-dashboard">
+    <div className="customer-container">
       <h1>Welcome to Your Dashboard</h1>
-      <section className="user-info">
+      <section className="customer-info">
         <h2>User Information</h2>
         <p>Name: John Doe</p>
         <p>Email: john.doe@example.com</p>
       </section>
 
-      <section className="order-history">
+      <section className="customer-order-history">
         <h2>Order History</h2>
         <ul>
           <li>Order #1234 - Date: 2024-07-21 - Status: Delivered</li>
@@ -33,7 +34,7 @@ function UserDashboard() {
         </ul>
       </section>
 
-      <section className="user-actions">
+      <section className="customer-actions">
         <h2>Actions</h2>
         <button onClick={handleMenuNavigation} className="btn btn-primary my-2">View Menu</button>
         <button onClick={handleCartNavigation} className="btn btn-primary my-2">View Cart</button>
