@@ -10,6 +10,8 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import Navbar from '../components/Navbar'; 
 import MenuForm from '../components/MenuForm';
 import CustomerMenu from '../components/CustomerMenu';
+import Cart from '../components/Cart'; 
+
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/menuform" element={<MenuForm />} />
+        <Route path="/cart" element={<Cart />} /> {/* Add route for Cart */}
         <Route path="/customer-menu" element={<CustomerMenu />} />
         <Route element={<ProtectedRoute role="admin" />}>
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
