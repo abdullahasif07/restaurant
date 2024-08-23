@@ -22,7 +22,7 @@ const CustomerMenu = () => {
   const handleAddToCart = (item) => {
     console.log("Adding to cart:", item); 
     dispatch(addToCart(item));
-    alert('Item added to cart successfully')
+    alert('Item added to cart successfully');
   };
   
 

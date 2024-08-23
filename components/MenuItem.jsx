@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 const MenuItem = (props) => {
   const { deleteItem } = useContext(MenuContext);
   const navi = useNavigate();
-  const { role, item, fetchItems, handleAddToCart } = props; 
+  const {item, fetchItems, handleAddToCart } = props;
+
+  const role = localStorage.getItem('role');
 
   const handleDelete = async (id) => {
     try {

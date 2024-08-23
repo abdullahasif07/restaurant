@@ -7,15 +7,16 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch(action.type) {
     case ADD_TO_CART:
-    console.log('Adding item to cart:', action.payload); // Debugging
+    //console.log('Adding item to cart:', action.payload); // Debugging
       return {
         ...state,
         cartItems: [...state.cartItems, action.payload]
       };
     case REMOVE_FROM_CART:
+      console.log('Removeing item from cart:', action.payload)
       return {
         ...state,
-        cartItems: state.cartItems.filter(item => item.id !== action.payload)
+        cartItems: state.cartItems.filter(item => item._id !== action.payload)
       };
     case UPDATE_CART_ITEM:
       return {

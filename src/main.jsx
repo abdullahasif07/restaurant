@@ -8,6 +8,7 @@ import store from './redux/store';  // Import the Redux store
 import UserState from '../context/user/UserState.jsx'; 
 import MenuState from '../context/menu/MenuState.jsx';
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>  {/* Wrapping app with Provider and pass the store */}

@@ -30,7 +30,9 @@ function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="login-form glass-effect">
+      <h3>Login to Continue</h3>
+      <p>Enter Email Address</p>
       <input
         type="email"
         name="email"
@@ -38,6 +40,7 @@ function Login() {
         onChange={handleChange}
         required
       />
+      <p>Enter Password</p>
       <input
         type="password"
         name="password"

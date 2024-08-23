@@ -10,8 +10,11 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import Navbar from '../components/Navbar'; 
 import MenuForm from '../components/MenuForm';
 import CustomerMenu from '../components/CustomerMenu';
-import Cart from '../components/Cart'; 
-
+import Cart from '../components/Cart';
+import AdminDashboardAdminSettings from '../components/AdminDashboard-AdminSettings';
+import AdminDashboardManageUser from '../components/AdminDashboard-ManageUser';
+import AdminDashboardMenuSettings from '../components/AdminDashboard-MenuSettings';
+import AdminDashboardSiteReports from '../components/AdminDashboard-SiteReports';
 
 function App() {
   return (
@@ -30,6 +33,14 @@ function App() {
           <Route path="/user-dashboard" element={<UserDashboard />} />
         </Route>
         <Route path="*" element={<Navigate to="/login" />} />
+
+        {/*admin dashboad components*/}
+        <Route path="/admin/menusettings" element={<AdminDashboardMenuSettings />} />
+        <Route path="/admin/usersettings" element={<AdminDashboardManageUser />} />
+        <Route path="/admin/reports" element={<AdminDashboardSiteReports/>} />
+        <Route path="/admin/adminsettings" element={<AdminDashboardAdminSettings />} />
+        {/*admin dashboad components end*/}
+
       </Routes>
     </>
   );

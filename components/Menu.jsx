@@ -20,9 +20,9 @@ const Menu = () => {
   }, [getItems]); 
 
   return (
-    <div className="container my-3">
+    <div className="menu">
       <h1>Menu</h1>
-      <div className="row">
+      <div className="menuitems">
         {items.map((item) => (
           <MenuItem key={item._id} item={item} fetchItems={fetchItems}/>
         ))}

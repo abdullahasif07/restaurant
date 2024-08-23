@@ -1,10 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { removeFromCart } from '../src/redux/actions/cartActions'
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-
+  const dispatch = useDispatch();
   console.log("Cart Items:", cartItems); // Debugging line
+  
+
+  const handleDelete = async (id) => {
+    try {
+      await dispatch(removeFromCart(id));
+      alert('Item deleted successfully')
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
 
   return (
     <div className="container my-3">
@@ -18,6 +30,11 @@ const Cart = () => {
                   <h5 className="card-title">{item.name}</h5>
                   <p className="card-text">Quantity: {item.quantity}</p>
                   <p className="card-text">Price: ${item.price}</p>
+                <button
+                className="btn "
+                onClick={() => handleDelete(item._id)}
+                style={{ cursor: 'pointer' }}
+              >Remove From Cart</button>
                 </div>
               </div>
             </div>
