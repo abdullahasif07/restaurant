@@ -15,7 +15,11 @@ function Navbar() {
     alert('logged out Successfully');
   }
 
-  const dashboardType = '/' + localStorage.getItem('role');
+  const toHome = () =>{
+    console.log(dashboardType);
+    
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div >
@@ -33,15 +37,15 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           {localStorage.getItem('role') && <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className={`nav-link`} aria-current="page" to={dashboardType}>
+              <Link onClick={toHome} className={`nav-link`} aria-current="page" to={localStorage.getItem('role') === 'admin'?'admin-dashboard':'user-dashboard'}>
                 Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className={`nav-link`} to={dashboardType}>
+            {/* {<li className="nav-item">
+              <Link className={`nav-link`} to={localStorage.getItem('role') === 'admin'?'admin-dashboard':'user-dashboard'}>
                 Menu
               </Link>
-            </li>
+            </li>} */}
           </ul>}
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
