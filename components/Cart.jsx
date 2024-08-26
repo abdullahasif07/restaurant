@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { removeFromCart } from '../src/redux/actions/cartActions'
+import OrderContext from '../context/order/CreateContext.js';
 
 const Cart = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-  console.log("Cart Items:", cartItems); // Debugging line
+  const {addOrder} = useContext(OrderContext);
   
 
   const handleDelete = async (id) => {
@@ -23,7 +24,24 @@ const Cart = () => {
   };
 
   const placeOrder = () =>{
+      let amount = 0;
+      cartItems.forEach(item => {
+        amount += item.price;
+      });
 
+      const order = {
+        items : cartItems,
+        amount,
+        delivery_details: "default", // will work on this,
+        payment_method: selectedButton === 'button1'? 'credit card': 'cash on delivery', // must be selected will work on this
+        
+      }
+
+      addOrder(localStorage.getItem('auth-token'), order).then((response) => {
+        alert('Order added successfully');
+      }).catch((error) => {
+        alert('Failed to add order');
+      });
   }
 
   return (
